@@ -1,192 +1,647 @@
---[[ 
- ██╗   ██╗ █████╗     ██████╗  █████╗ ███████╗    ██╗  ██╗██╗   ██╗██████╗ ██║   ██║██╔══██╗  
- ██╔══██╗██╔═══██╗██╔════╝    ██║ ██╔╝╚██╗ ██╔╝██╔══██╗ ██║   ██║███████║  
- ██║  ██║██║   ██║███████╗    █████╔╝  ╚████╔╝ ██████╔╝ ██║   ██║██╔══██║  
- ██║  ██║██║   ██║╚════██║    ██╔═██╗   ╚██╔╝  ██╔═══╝ ██║   ██║██║  ██║  
- ██████╔╝╚██████╔╝███████║    ██║  ██╗   ██║   ██║   ╚██████╔╝███████║  
- ╚═════╝  ╚═════╝ ╚══════╝    ╚═╝  ╚═╝   ╚═╝   ╚═╝    ╚═════╝ ╚══════╝  
+-- ØsØ Ekibi Tarafından Yapılmıştır.
+-- Made By The ØsØ Ekibi
 
- TA ØsØ Hub - Geliştirici: ØsØ Ekibi
---]]
+_CoMxlahgJDwK = "Bu dosya MoonSec V3 ile korundu"
+MoonSec_StringsHiddenAttr = true
+local LocalPlayer = game.Players.LocalPlayer
 
--- ◈ Koruma Katmanları
-for i = 1,20 do 
-    if not game:IsLoaded() then game.Loaded:Wait() end 
-    task.wait(0.05) 
-end
-local Players = game:GetService("Players")
-local ReplicatedStorage = game:GetService("ReplicatedStorage")
-local UserInputService = game:GetService("UserInputService")
-local LocalPlayer = Players.LocalPlayer
-local PlayerGui = LocalPlayer:WaitForChild("PlayerGui")
+-- Ana kütüphane yükleme
+local OrionLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/Vnadreb/KohlerLibrary/refs/heads/main/KohlerHub.txt"))()
 
--- ◈ Yükleme Animasyonu
-local loading = Instance.new("ScreenGui",PlayerGui)
-local txt = Instance.new("TextLabel",loading)
-txt.Size, txt.Position = UDim2.new(0.4,0,0.1,0), UDim2.new(0.3,0,0.45,0)
-txt.BackgroundTransparency = 1
-txt.Text, txt.TextScaled = "TA ØsØ Hub Yükleniyor...", true
-txt.TextColor3 = Color3.new(1,1,1)
-task.wait(2)
-loading:Destroy()
-
--- ◈ OrionLib GUI Kit
-local OrionLib = {}
-do
-    -- [OrionLib code omitted for brevity: it's the standard Sydearr/Orion library GUI loader]
-    -- You can paste in the full OrionLib implementation here.
-end
-
--- ◈ Pencere Oluştur
-local Window = OrionLib:MakeWindow({
-    Name = "TA ØsØ Hub",
-    IntroEnabled = false,
-    SaveConfig = false,
+-- Ana pencere oluşturma
+local Pencere = OrionLib:MakeWindow({
+	["ConfigFolder"] = "OrionTest",
+	["Name"] = "ØsØ - TA V1.6.5 [GİZLİ KAYNAK]",
+	["HidePremium"] = false,
+	["SaveConfig"] = true
 })
 
--- ◈ Kategoriler
-local tabAnasayfa = Window:MakeTab({ Name = "Anasayfa", Icon = "rbxassetid://7072716164" })
-local tabFakeRank   = Window:MakeTab({ Name = "Sahte Rütbe", Icon = "rbxassetid://7072716722" })
-local tabDrive      = Window:MakeTab({ Name = "Araç Sürme", Icon = "rbxassetid://7072719338" })
-local tabTanitim    = Window:MakeTab({ Name = "Tanıtım", Icon = "rbxassetid://7072720931" })
-local tabTemalar    = Window:MakeTab({ Name = "Temalar", Icon = "rbxassetid://7072721467" })
-local tabAyarlar    = Window:MakeTab({ Name = "Ayarlar", Icon = "rbxassetid://7072722181" })
-local tabToollar    = Window:MakeTab({ Name = "Toollar", Icon = "rbxassetid://7072722844" })
+-- Anasayfa sekmesi
+local AnaSekme = Pencere:MakeTab({
+	["OnlyPremium"] = false,
+	["Icon"] = "rbxassetid://4483345998",
+	["Name"] = "►† Ana Sayfa"
+})
 
--- ◈ Sahte Rütbe Transfer
-tabFakeRank:AddButton({ Name = "FakeRankGui Yükle", Callback = function()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/38462883/FakeRankGui/refs/heads/main/FakeRankGui.lua"))()
-    OrionLib:MakeNotification({ Name = "Fake Rütbe", Content = "Yüklendi!", Time = 3 })
-end })
+AnaSekme:AddSection({["Name"] = "- UI Anasayfası -"})
+AnaSekme:AddParagraph("ØsØ – TA V1.6.5 [AÇIK KAYNAK] Büyük Güncelleme! ", "\n \n►† Oto Parkur Yapma Eklendi.\n \n►† Araba Sürme Eklendi.\n \n►† Lag Server Eklendi.\n \n►† Modlu Glock-17 Eklendi.\n\n►† Anti-Track Geliştirildi.\n\n►† Tümünü Öldür Menü Eklendi.\n\n►† Oyuncuları Eklendi.\n\n►† Yüz Değiştirme Eklendi.\n\n►† NPC Kontrol Eklendi.\n\n►† Animasyon Araçlarını Eklendi.\n\n►† THO Para Hilesi Eklendi.\n\n►† TPT Eğitimi Aşama Eklendi.\n\n►† Basit Kamplar Takım Değiştirici Eklendi.\n\n►† TA Sahte Çevirme Eklendi.\n\n►† TA Sahte Transfer Eklendi.\n\n►† Sahte Sohbet Mesajı Eklendi.\n\n►† Hitbox Genişletici Eklendi.\n\n►† Aimbot Eklendi.\n\n►† Silent Aim Eklendi.\n\n•† Not: Bu hile tamamen ücretsizdir, para ile şeytan olur ise bizimle iletişime geçer.\n\n\n\n")
+AnaSekme:AddParagraph("Kullanıcı Arayüzü Geliştiricileri:", "\n \n•† @ØsØ\n\n")
+AnaSekme:AddParagraph("İçerik Yaratıcıları:", "\n\n•† @ØsØ Ekibi (Saygılarımızla.)\n")
 
--- ◈ Araç Sürme
-tabDrive:AddButton({ Name = "Araba Scripti", Callback = function()
-    loadstring(game:HttpGet("https://pastebin.com/raw/ZqbjzH1p"))()
-    OrionLib:MakeNotification({ Name = "Araç Sürme", Content = "Aktif!", Time = 3 })
-end })
+-- Bildirim
+OrionLib:MakeNotification({
+	["Time"] = 8,
+	["Image"] = "rbxassetid://4483345998",
+	["Content"] = "ØsØ'a Hoşgeldin!",
+	["Name"] = "Hoşgeldin!"
+})
 
--- ◈ Tanıtım (İlk açılış)
-tabTanitim:AddParagraph("Hoşgeldin!", "TA ØsØ Hub'ı keşfetmek için 'Tamam' tuşuna bas.")
-tabTanitim:AddButton({ Name = "Tamam", Callback = function() end })
+-- OP & Rütbe sekmesi
+local OPRankTab = Pencere:MakeTab({
+	["OnlyPremium"] = false,
+	["Icon"] = "rbxassetid://4483345998",
+	["Name"] = "►† OP & Rütbe"
+})
 
--- ◈ Temalar
-tabTemalar:AddColorPicker({ Name = "Ana Renk", Default = Color3.fromRGB(25,25,25), Flag = "MainColor", Callback = function(c)
-    -- Tema değiştir
-end })
+OPRankTab:AddSection({["Name"] = "- Jackler -"})
+OPRankTab:AddButton({
+	["Name"] = "• Oto JJ Çek! Tool (1 - 10.000)",
+	["Callback"] = function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/KaanFriztche/Açık-kaynak-/refs/heads/main/JJobf.lua"))()
+	end
+})
 
--- ◈ Ayarlar
-tabAyarlar:AddToggle({ Name = "Anti-AFK", Default = true, Flag = "AntiAFK", Callback = function(v)
-    if v then
-        LocalPlayer.Idled:Connect(function() 
-            game:GetService("VirtualInputManager"):SendKeyEvent(true,Enum.KeyCode.Space,false,game) 
-        end)
-    end
-end })
+OPRankTab:AddButton({
+	["Name"] = "• Oto GJ Çek! Tool (1 - 10.000)",
+	["Callback"] = function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/KaanFriztche/Açık-kaynak-/refs/heads/main/GJobf.lua"))()
+	end
+})
 
--- ◈ Toollar: Loadstring Scriptler
-local toolScripts = {
-    { Name="Tenzil Script", URL="https://pastebin.com/raw/eDfQ1VwT" },
-    { Name="Çöl OP Farm", URL="https://pastebin.com/raw/jxrbkf4b" },
-    { Name="Free Kamp Team", URL="https://raw.githubusercontent.com/TheKaplumbag/0-butceliaskerkampiteamscript/refs/heads/main/Team%20script.lua" },
-    { Name="Hitbox Büyütme", URL="https://raw.githubusercontent.com/hm5650/Hitblox/refs/heads/main/Hitblox" },
-    { Name="Abuse Script", URL="https://pastebin.com/raw/yCLCxEz0" },
-    { Name="Envanter Kopyalama", URL="https://raw.githubusercontent.com/enverscripts/Open-source/main/Envanter%20Kopyalama" },
-}
-for _,ts in ipairs(toolScripts) do
-    tabToollar:AddButton({ Name=ts.Name, Callback=function()
-        loadstring(game:HttpGet(ts.URL))()
-        OrionLib:MakeNotification({ Name=ts.Name, Content="Yüklendi!", Time=2 })
-    end })
-end
+OPRankTab:AddButton({
+	["Name"] = "• Oto HJ Çek! Tool (1 - 10)",
+	["Callback"] = function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/KaanFriztche/Açık-kaynak-/refs/heads/main/HJ%C3%87ek"))()
+	end
+})
 
--- ◈ JJ, GJ, HJ Sistemleri
-local aktif, mod, maxSayi = false, "JJ", 200
-local function zipla() LocalPlayer.Character:WaitForChild("Humanoid"):ChangeState(Enum.HumanoidStateType.Jumping) end
-local function mesajYolla(m) ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(m,"All") end
+OPRankTab:AddSection({["Name"] = "- Yararınızı Ayarlayın -"})
+OPRankTab:AddButton({
+	["Name"] = "• Oto Alım Yap",
+	["Callback"] = function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/KaanFriztche/Açık-kaynak-/refs/kafalar/main/otoal%C4%B1m"))()
+	end
+})
 
-local sayilar = {
-    [1]="BİR",[2]="İKİ",[3]="ÜÇ",[4]="DÖRT",[5]="BEŞ",[6]="ALTI",[7]="YEDİ",[8]="SEKİZ",[9]="DOKUZ",
-    [10]="ON",[20]="YİRMİ",[30]="OTUZ",[40]="KIRK",[50]="ELLİ",[60]="ALTMIŞ",[70]="YETMİŞ",[80]="SEKSEN",[90]="DOKSAN",
-    [100]="YÜZ",[200]="İKİ YÜZ"
-}
-local function sayiToYazi(n)
-    if sayilar[n] then return sayilar[n] end
-    if n<100 then
-        local o=math.floor(n/10)*10; return sayilar[o].." "..(n%10>0 and sayilar[n%10] or "")
-    else
-        return "YÜZ "..sayiToYazi(n-100)
-    end
-end
+OPRankTab:AddButton({
+	["Name"] = "• Doğru Yanlış Takım Değiştirme",
+	["Callback"] = function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/KaanFriztche/Açık-kaynak-/refs/heads/main/dygecme"))()
+	end
+})
 
-local function jjLoop()
-    while aktif do
-        for i=1,maxSayi do
-            if not aktif then return end
-            local y=sayiToYazi(i)
-            if mod=="JJ" then
-                mesajYolla(y); zipla()
-            elseif mod=="GJ" then
-                mesajYolla(y:sub(1,1):upper()..y:sub(2):lower().."."); zipla()
-            elseif mod=="HJ" then
-                for w in y:gmatch("%S+") do
-                    for c in w:gmatch(".") do mesajYolla(c); zipla(); task.wait(0.1) end
-                    mesajYolla(w); zipla(); task.wait(0.1)
-                end
-            end
-            task.wait(0.5)
-        end
-    end
-end
+OPRankTab:AddButton({
+	["Name"] = "• Sahte OP",
+	["Callback"] = function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/KaanFriztche/Açık-kaynak-/refs/heads/main/FakeOp.lua"))()
+	end
+})
 
-tabToollar:AddDropdown({ Name="Mod Seç", Default="JJ", Options={"JJ","GJ","HJ"}, Flag="JJMod", Callback=function(v) mod=v end })
-tabToollar:AddSlider({ Name="Maksimum", Min=10, Max=200, Default=200, Flag="JJMax", Callback=function(v) maxSayi=v end })
-tabToollar:AddButton({ Name="Başlat", Callback=function() if not aktif then aktif=true; task.spawn(jjLoop) end end })
-tabToollar:AddButton({ Name="Durdur", Callback=function() aktif=false end })
+OPRankTab:AddButton({
+	["Name"] = "• ØsØ Sohbet Alanı",
+	["Callback"] = function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/valoscripter/Salamsucuksosis/refs/heads/main/SydearrChat.lua"))()
+	end
+})
 
--- ◈ Sahte Takım Geçiş
-tabToollar:AddButton({ Name="Ordu Subayı (Sahte)", Callback=function()
-    OrionLib:MakeNotification({ Name="Fake Team", Content="Ordu Subayları geçildi!", Time=2 })
-end })
+OPRankTab:AddButton({
+	["Name"] = "• Araba Sürme",
+	["Callback"] = function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/KaanFriztche/Açık-kaynak-/refs/heads/main/Araba-S%C3%BCrme"))()
+	end
+})
 
--- ◈ NPC All + ESP
-do
-    local espOn, npcOn, delayTime = false, false, 1
-    local function enableESP(m)
-        for _,p in pairs(m:GetDescendants()) do
-            if p:IsA("BasePart") and not p:FindFirstChild("ESP") then
-                local box=Instance.new("BoxHandleAdornment",p)
-                box.Adornee=p; box.AlwaysOnTop=true;
-                box.Size=p.Size+Vector3.new(0.1,0.1,0.1); box.Transparency=0.5; box.Color3=Color3.new(1,0,0)
-            end
-        end
-    end
-    local function npcLoop()
-        while npcOn do
-            for _,obj in pairs(workspace:GetDescendants()) do
-                if obj:IsA("Model") and obj:FindFirstChild("Humanoid") then
-                    local isP=false
-                    for _,pl in pairs(Players:GetPlayers()) do
-                        if pl.Character==obj then isP=true; break end
-                    end
-                    if not isP and obj~=LocalPlayer.Character then
-                        obj.Humanoid.Health=0
-                        if espOn then enableESP(obj) end
-                    end
-                end
-            end
-            task.wait(delayTime)
-        end
-    end
-    tabToollar:AddToggle({ Name="ESP Aç/Kapa", Default=false, Callback=function(v) espOn=v end })
-    tabToollar:AddToggle({ Name="NPC All", Default=false, Callback=function(v) npcOn=v; if v then task.spawn(npcLoop) end end })
-    tabToollar:AddSlider({ Name="Kill Delay", Min=0.1, Max=5, Default=1, Callback=function(v) delayTime=v end })
-end
+OPRankTab:AddButton({
+	["Name"] = "• Oto Parkur Yapma",
+	["Callback"] = function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/KaanFriztche/Açık-kaynak-/refs/heads/main/ParkurYapma.lua"))()
+	end
+})
 
--- ◈ FE Server Crash (TEST AMAÇLI)
-tabToollar:AddButton({ Name="Server Crash (FE)", Callback=function()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/v0c0n1337/scripts/refs/heads/main/Protected_9068977494054906.lua.txt"))()
-    OrionLib:MakeNotification({ Name="Crash", Content="Başlatıldı!", Time=3 })
-end })
+OPRankTab:AddButton({
+	["Name"] = "• Genel Liste",
+	["Callback"] = function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/KaanFriztche/Açık-kaynak-/refs/heads/main/GeneralListe.lua"))()
+	end
+})
 
--- ◈ Bitiş Bildirimi
-OrionLib:MakeNotification({ Name="TA ØsØ Hub", Content="Yüklendi!", Time=4 })
+OPRankTab:AddButton({
+	["Name"] = "• Herkesi AS.ĞZ Yapma (Asteşmen +)",
+	["Callback"] = function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/KaanFriztche/Open-source-/refs/heads/main/Herkesi-AS.IZ-YAPMA"))()
+	end
+})
+
+OPRankTab:AddSection({["Name"] = "- OP Kasma -"})
+OPRankTab:AddButton({
+	["Name"] = "• Tepeköy Çiftliği (24 Saatte 1M OP)",
+	["Callback"] = function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/KaanFriztche/Open-source-/refs/heads/main/Tepek%C3%B6y.lua"))()
+	end
+})
+
+OPRankTab:AddButton({
+	["Name"] = "• Çöl Farm (6 Saatte 1M OP)",
+	["Callback"] = function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/KaanFriztche/Açık-kaynak-/refs/heads/main/C%C3%B6lFarm.lua"))()
+	end
+})
+
+-- Troller sekmesi
+local TrollTab = Pencere:MakeTab({
+	["OnlyPremium"] = false,
+	["Icon"] = "rbxassetid://4483345998",
+	["Name"] = "►† Troller"
+})
+
+TrollTab:AddSection({["Name"] = "- Animasyonlu -"})
+TrollTab:AddButton({
+	["Name"] = "• R6 Bang FE",
+	["Callback"] = function()
+		loadstring(game:HttpGet("https://pastebin.com/raw/aPSHMV6K"))()
+	end
+})
+
+TrollTab:AddButton({
+	["Name"] = "• R6 Dick Emme FE",
+	["Callback"] = function()
+		loadstring(game:HttpGet("https://pastebin.com/raw/FPu4e2Qh"))()
+	end
+})
+
+TrollTab:AddButton({
+	["Name"] = "• R6 Siktir Git FE",
+	["Callback"] = function()
+		loadstring(game:HttpGet("https://pastebin.com/raw/zHbw7ND1"))()
+	end
+})
+
+TrollTab:AddButton({
+	["Name"] = "• R6 ve R15 Sarılma FE",
+	["Callback"] = function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/JSFKGBASDJKHIOAFHDGHIUODSGBJKLFGDKSB/fe/refs/heads/main/FEHUGG"))()
+	end
+})
+
+TrollTab:AddButton({
+	["Name"] = "• R6 Animasyonları FE",
+	["Callback"] = function()
+		loadstring(game:HttpGet("https://pastebin.com/raw/1p6xnBNf"))()
+	end
+})
+
+TrollTab:AddButton({
+	["Name"] = "• R6 SCP-096 FE",
+	["Callback"] = function()
+		loadstring(game:HttpGet("https://pastefy.app/YsJgITXR/raw"))()
+	end
+})
+
+TrollTab:AddButton({
+	["Name"] = "• R6 Fighter FE (Yumruk ve Savunma)",
+	["Callback"] = function()
+		loadstring(game:HttpGet("https://pastefy.app/wxVAgZpT/raw"))()
+	end
+})
+
+TrollTab:AddSection({["Name"] = "- Troller -"})
+TrollTab:AddButton({
+	["Name"] = "• R6 Dokunmatik Fırlatma FE",
+	["Callback"] = function()
+		loadstring(game:HttpGet("https://pastefy.app/59mJGQGe/raw"))()
+	end
+})
+
+TrollTab:AddButton({
+	["Name"] = "• R6 Görünmez FE",
+	["Callback"] = function()
+		loadstring(game:HttpGet("https://pastebin.com/raw/3Rnd9rHf"))()
+	end
+})
+
+TrollTab:AddButton({
+	["Name"] = "• Anti-İz",
+	["Callback"] = function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/KaanFriztche/Açık-kaynak-/refs/heads/main/Anti-Track.lua"))()
+	end
+})
+
+TrollTab:AddButton({
+	["Name"] = "• Görünmez Ol (ØsØ Made)",
+	["Callback"] = function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/KaanFriztche/Open-source-/refs/heads/main/G%C3%B6r%C3%BCnmezOl.lua"))()
+	end
+})
+
+TrollTab:AddButton({
+	["Name"] = "• Tüm Erkekleri Öldür (Öldürme Yetkisi)",
+	["Callback"] = function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/KaanFriztche/Açık-kaynak-/refs/heads/main/KillAllGui.txt"))()
+	end
+})
+
+TrollTab:AddButton({
+	["Name"] = "• Oyuncuları Getir",
+	["Callback"] = function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/KaanFriztche/Açık-kaynak-/refs/heads/main/Rejoin"))()
+	end
+})
+
+TrollTab:AddButton({
+	["Name"] = "• Hepsini Savur",
+	["Callback"] = function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/KaanFriztche/Açık-kaynak-/refs/heads/main/flingall.lua"))()
+	end
+})
+
+TrollTab:AddButton({
+	["Name"] = "• Tutuklu Yakalanmama",
+	["Callback"] = function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/KaanFriztche/Open-source-/refs/heads/main/DetaineYakalanmama.lua"))()
+	end
+})
+
+TrollTab:AddButton({
+	["Name"] = "• Gecikme Sunucusu",
+	["Callback"] = function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/KaanFriztche/Açık-kaynak-/refs/heads/main/LagServer"))()
+	end
+})
+
+TrollTab:AddButton({
+	["Name"] = "• Modlu Glock-17",
+	["Callback"] = function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/KaanFriztche/Açık-kaynak-/refs/heads/main/ModluGlock.lua"))()
+	end
+})
+
+TrollTab:AddButton({
+	["Name"] = "• Yüz Değiştirme FE",
+	["Callback"] = function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/KaanFriztche/Açık-kaynak-/refs/heads/main/Y%C3%BCz-De%C4%9Fi%C5%9Ftirme.lua"))()
+	end
+})
+
+TrollTab:AddButton({
+	["Name"] = "• Silah Modifikasyonları",
+	["Callback"] = function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/KaanFriztche/Açık-kaynak-/refs/heads/main/gunmods.lua"))()
+	end
+})
+
+TrollTab:AddButton({
+	["Name"] = "• Hasar Almama",
+	["Callback"] = function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/KaanFriztche/Open-source-/refs/heads/main/HasarAlmama.lua"))()
+	end
+})
+
+TrollTab:AddButton({
+	["Name"] = "• NPC Kontrol",
+	["Callback"] = function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/randomstring0/Qwerty/refs/heads/main/qwerty38.lua"))()
+	end
+})
+
+-- Toollar sekmesi
+local AraçlarSekmesi = Pencere:MakeTab({
+	["OnlyPremium"] = false,
+	["Icon"] = "rbxassetid://4483345998",
+	["Name"] = "►† Araçlar"
+})
+
+AraçlarSekmesi:AddSection({["Name"] = "- Toollar Scriptleri -"})
+AraçlarSekmesi:AddButton({
+	["Name"] = "• R6 İçecek Kola Aracı FE",
+	["Callback"] = function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/ShutUpJamesTheLoser/ferobloxscriptdrink/refs/heads/main/fedrinkscriptroblox2025"))()
+	end
+})
+
+AraçlarSekmesi:AddButton({
+	["Name"] = "• R6 31 Çek Tool FE",
+	["Callback"] = function()
+		loadstring(game:HttpGet("https://pastefy.app/wa3v2vgm/raw"))()
+	end
+})
+
+AraçlarSekmesi:AddButton({
+	["Name"] = "• R6 Animasyon Araçları",
+	["Callback"] = function()
+		loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Epik-R6-Dancezz-42246"))()
+	end
+})
+
+AraçlarSekmesi:AddButton({
+	["Name"] = "• Telekinezi Aracı FE",
+	["Callback"] = function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/randomstring0/Qwerty/refs/heads/main/qwerty1.lua"))()
+	end
+})
+
+AraçlarSekmesi:AddButton({
+	["Name"] = "• R6 Mevlana Aracı FE",
+	["Callback"] = function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/KaanFriztche/Açık-kaynak-/refs/heads/main/mevlana"))()
+	end
+})
+
+AraçlarSekmesi:AddButton({
+	["Name"] = "• R6 Işınlama Aracı FE",
+	["Callback"] = function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/KaanFriztche/Açık-kaynak-/refs/heads/main/ToTool.lua"))()
+	end
+})
+
+AraçlarSekmesi:AddButton({
+	["Name"] = "• R6 To Tool FE",
+	["Callback"] = function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/KaanFriztche/Açık-kaynak-/refs/heads/main/TeleportTool.lua"))()
+	end
+})
+
+-- Teleportlar sekmesi
+local TeleportTab = Pencere:MakeTab({
+	["OnlyPremium"] = false,
+	["Icon"] = "rbxassetid://4483345998",
+	["Name"] = "►† Işınlanmalar"
+})
+
+TeleportTab:AddSection({["Name"] = "- Metro İstasyonları -"})
+TeleportTab:AddButton({
+	["Name"] = "• Denetim Alanı",
+	["Callback"] = function()
+		LocalPlayer.Character:MoveTo(Vector3.new(1145.24, 13.76, -255.1))
+	end
+})
+
+TeleportTab:AddButton({
+	["Name"] = "• Duman Adası",
+	["Callback"] = function()
+		LocalPlayer.Character:MoveTo(Vector3.new(-2037.29, 17.98, -364.72))
+	end
+})
+
+TeleportTab:AddButton({
+	["Name"] = "• Kafeterya",
+	["Callback"] = function()
+		LocalPlayer.Character:MoveTo(Vector3.new(2927.18, 105.48, 536.67))
+	end
+})
+
+TeleportTab:AddButton({
+	["Name"] = "• Güvenli Bölge",
+	["Callback"] = function()
+		LocalPlayer.Character:MoveTo(Vector3.new(2641.71, 31.82, 198.66))
+	end
+})
+
+TeleportTab:AddButton({
+	["Name"] = "• Sivil Taban",
+	["Callback"] = function()
+		LocalPlayer.Character:MoveTo(Vector3.new(985.43, 13.74, -1277.78))
+	end
+})
+
+TeleportTab:AddButton({
+	["Name"] = "• TSK Üssü",
+	["Callback"] = function()
+		LocalPlayer.Character:MoveTo(Vector3.new(3077.62, 34.01, -252.62))
+	end
+})
+
+TeleportTab:AddButton({
+	["Name"] = "• HKK Üssü",
+	["Callback"] = function()
+		LocalPlayer.Character:MoveTo(Vector3.new(1278.45, 33.45, 1510.48))
+	end
+})
+
+TeleportTab:AddSection({["Name"] = "- Base İçi Teleport -"})
+TeleportTab:AddButton({
+	["Name"] = "• Hava Kuvvetleri Üssü İçi",
+	["Callback"] = function()
+		LocalPlayer.Character:MoveTo(Vector3.new(867.19, 34.05, 1641.8))
+	end
+})
+
+TeleportTab:AddButton({
+	["Name"] = "• Kara Kuvvetleri Üssü İçi",
+	["Callback"] = function()
+		LocalPlayer.Character:MoveTo(Vector3.new(1481.57, 14.01, 778))
+	end
+})
+
+TeleportTab:AddButton({
+	["Name"] = "• Ordu Subayları Üssü",
+	["Callback"] = function()
+		LocalPlayer.Character:MoveTo(Vector3.new(3136.84, 35.33, -218.44))
+	end
+})
+
+TeleportTab:AddButton({
+	["Name"] = "• Sınır Müfettişleri Base İçi",
+	["Callback"] = function()
+		LocalPlayer.Character:MoveTo(Vector3.new(858.55, 14.01, -953.55))
+	end
+})
+
+TeleportTab:AddButton({
+	["Name"] = "• ÖKB Tabanı İçi",
+	["Callback"] = function()
+		LocalPlayer.Character:MoveTo(Vector3.new(1389.01, 14.3, -559.9))
+	end
+})
+
+TeleportTab:AddButton({
+	["Name"] = "• ÖKK Tabanı İçi",
+	["Callback"] = function()
+		LocalPlayer.Character:MoveTo(Vector3.new(1459.73, 14.3, -559.84))
+	end
+})
+
+TeleportTab:AddButton({
+	["Name"] = "• Jandarma Üssü İçi",
+	["Callback"] = function()
+		LocalPlayer.Character:MoveTo(Vector3.new(884.84, 13.88, 212.98))
+	end
+})
+
+TeleportTab:AddButton({
+	["Name"] = "• Askeri İnzibat Üssü İçi",
+	["Callback"] = function()
+		LocalPlayer.Character:MoveTo(Vector3.new(1490.47, 13.95, -1126.18))
+	end
+})
+
+TeleportTab:AddSection({["Name"] = "- Üs Önü Teleport -"})
+TeleportTab:AddButton({
+	["Name"] = "• Hava Kuvvetleri Üssü Önü",
+	["Callback"] = function()
+		LocalPlayer.Character:MoveTo(Vector3.new(1206.28, 33.45, 1586.71))
+	end
+})
+
+TeleportTab:AddButton({
+	["Name"] = "• Kara Kuvvetleri Üssü Önü",
+	["Callback"] = function()
+		LocalPlayer.Character:MoveTo(Vector3.new(1265.66, 13.76, 619.76))
+	end
+})
+
+TeleportTab:AddButton({
+	["Name"] = "• Sınır Müfettişleri Base Önü",
+	["Callback"] = function()
+		LocalPlayer.Character:MoveTo(Vector3.new(664.41, 13.76, -975.37))
+	end
+})
+
+TeleportTab:AddButton({
+	["Name"] = "• Özel Kuvvetler Üssü Önü",
+	["Callback"] = function()
+		LocalPlayer.Character:MoveTo(Vector3.new(1265.38, 13.76, -490.94))
+	end
+})
+
+TeleportTab:AddButton({
+	["Name"] = "• Jandarma Üssü Önü",
+	["Callback"] = function()
+		LocalPlayer.Character:MoveTo(Vector3.new(663.62, 13.76, 256.96))
+	end
+})
+
+TeleportTab:AddButton({
+	["Name"] = "• Askeri İnzibat Üssü Önü",
+	["Callback"] = function()
+		LocalPlayer.Character:MoveTo(Vector3.new(1265.04, 13.76, -947.38))
+	end
+})
+
+-- Tüm Kamplar sekmesi
+local AllCampsTab = Pencere:MakeTab({
+	["OnlyPremium"] = false,
+	["Icon"] = "rbxassetid://4483345998",
+	["Name"] = "►† Tüm Kamplar"
+})
+
+AllCampsTab:AddSection({["Name"] = "- Tüm Kamp Scriptleri -"})
+AllCampsTab:AddButton({
+	["Name"] = "• THO Para Hilesi",
+	["Callback"] = function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/KaanFriztche/Açık-kaynak-/refs/heads/main/THOParaHilesi.txt"))()
+	end
+})
+
+AllCampsTab:AddButton({
+	["Name"] = "• TPT Eğitim Açma",
+	["Callback"] = function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/KaanFriztche/Açık-kaynak-/refs/heads/main/TPTegitim.txt"))()
+	end
+})
+
+AllCampsTab:AddButton({
+	["Name"] = "• Takım Değiştirici",
+	["Callback"] = function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/KaanFriztche/Açık-Kaynak-/refs/kafalar/ana/Ücretsiz-Kamp-Takım-Değiştirici"))()
+	end
+})
+
+AllCampsTab:AddButton({
+	["Name"] = "• TA Sahte Çevirme",
+	["Callback"] = function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/KaanFriztche/Açık-kaynak-/refs/heads/main/SahteCark.txt"))()
+	end
+})
+
+AllCampsTab:AddButton({
+	["Name"] = "• Sahte Sohbet Mesajı",
+	["Callback"] = function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/KaanFriztche/Açık-kaynak-/refs/heads/main/SahteMesaj.txt"))()
+	end
+})
+
+AllCampsTab:AddButton({
+	["Name"] = "• TA Sahte Transfer",
+	["Callback"] = function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/KaanFriztche/Açık-kaynak-/refs/heads/main/SahtegTransfer.txt"))()
+	end
+})
+
+-- Discord sekmesi
+local DiscordTab = Pencere:MakeTab({
+	["OnlyPremium"] = false,
+	["Icon"] = "rbxassetid://4483345998",
+	["Name"] = "►† Discord"
+})
+
+DiscordTab:AddSection({["Name"] = "- Bize Buralardan Ulaşabilirsiniz -"})
+DiscordTab:AddParagraph("Kullanıcı Arayüzü Geliştiricileri:", "\n \n•† @tarantulagt\n\n")
+DiscordTab:AddParagraph("İçerik Oluşturucular:", "\n\n•† @tarantulagt (Saygılarımızla.)\n")
+
+-- Diğer sekmesi
+local DiğerSekme = Pencere:MakeTab({
+	["OnlyPremium"] = false,
+	["Icon"] = "rbxassetid://4483345998",
+	["Name"] = "►† Diğer"
+})
+
+DiğerSekme:AddSection({["Name"] = "- Diğer Scriptler -"})
+DiğerSekme:AddButton({
+	["Name"] = "• Sonsuz Getiri Yöneticisi",
+	["Callback"] = function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source"))()
+	end
+})
+
+DiğerSekme:AddButton({
+	["Name"] = "• Hitbox Genişletici",
+	["Callback"] = function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/KaanFriztche/Açık-kaynak-/refs/heads/main/HitboxExpander"))()
+	end
+})
+
+DiğerSekme:AddButton({
+	["Name"] = "• AFK Karşıtı",
+	["Callback"] = function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/Genesisuii/Genesisuii/refs/heads/main/Anti%20AFK%20script"))()
+	end
+})
+
+DiğerSekme:AddButton({
+	["Name"] = "• Aimbot",
+	["Callback"] = function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/KaanFriztche/Açık-kaynak-/refs/heads/main/Aimbot"))()
+	end
+})
+
+DiğerSekme:AddButton({
+	["Name"] = "• Sessiz Nişan Menüsü (PC)",
+	["Callback"] = function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/godwarekrafiq/universalscript/refs/heads/main/universalscript"))()
+	end
+})
+
+DiğerSekme:AddButton({
+	["Name"] = "• Sohbet Çekilişi",
+	["Callback"] = function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/ocfi/_/refs/heads/main/a"))()
+	end
+})
+
+DiğerSekme:AddButton({
+	["Name"] = "• Her Şey ØsØ",
+	["Callback"] = function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/KaanFriztche/Açık-kaynak-/refs/kafalar/main/Her%C5%9EeySydearr.lua"))()
+	end
+})
+
+DiğerSekme:AddButton({
+	["Name"] = "• Sahte Gecikme FE",
+	["Callback"] = function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/KaanFriztche/Açık-kaynak-/refs/heads/main/FakeLag.lua"))()
+	end
+})
+
+DiğerSekme:AddButton({
+	["Name"] = "• Yürüme Hızı Değiştirici",
+	["Callback"] = function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/KaanFriztche/Açık-kaynak-/refs/kafalar/main/SpeedMen%C3%BC.lua"))()
+	end
+})
+
+DiğerSekme:AddButton({
+	["Name"] = "• Işınlanma İpuçları", -- Burası kodun son düğmesiydi, bu yüzden eksik tırnağı ve parantezi ekledim.
+	["Callback"] = function()
+		-- Bu kısım boştu, buraya isterseniz bir loadstring veya başka bir fonksiyon ekleyebilirsiniz.
+	end
+})
